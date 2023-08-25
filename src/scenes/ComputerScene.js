@@ -23,8 +23,10 @@ class ComputerScene extends Scene {
       .classList.remove("hidden");
 
     const againBtn = document.querySelector('[data-action="again"]');
+
     againBtn.classList.add("hidden");
     const giveUpBtn = document.querySelector('[data-action="giveup"]');
+    giveUpBtn.classList.remove("hidden");
 
     const addRemoveAgainBtn = addAndRemoveEventListener(
       againBtn,
@@ -51,23 +53,25 @@ class ComputerScene extends Scene {
 
     const isEnd = player.lose || opponent.lose;
 
+    const cells = opponent.cells.flat();
+    cells.forEach((cell) => cell.classList.remove("battlefield-item__active"));
+
     if (isEnd) {
+      const againBtn = document.querySelector('[data-action="again"]');
+      againBtn.classList.remove("hidden");
+      const giveUpBtn = document.querySelector('[data-action="giveup"]');
+      giveUpBtn.classList.add("hidden");
+
       if (opponent.lose) {
         this.status.textContent = "Вы победили!";
       } else {
         this.status.textContent = "Компьютер победил";
       }
-      document
-        .querySelector('[data-action="again"]')
-        .classList.remove("hidden");
-      document.querySelector('[data-action="giveup"]').classList.add("hidden");
 
       this.stop();
       return;
     }
 
-    const cells = opponent.cells.flat();
-    cells.forEach((cell) => cell.classList.remove("battlefield-item__active"));
     const cell = cells.find((cell) => {
       return isUnderPoint(mouse, cell);
     });
@@ -134,8 +138,29 @@ class ComputerScene extends Scene {
   }
 
   stop() {
-    for (const eventToRemove of this.eventsToRemove) {
-      eventToRemove();
-    }
+    //  for (const eventToRemove of this.eventsToRemove) {
+    //    eventToRemove();
+    //  }
+
+    const againBtn = document.querySelector('[data-action="again"]');
+
+    const giveUpBtn = document.querySelector('[data-action="giveup"]');
+
+    const addRemoveAgainBtn = addAndRemoveEventListener(
+      againBtn,
+      "click",
+      () => {
+        this.app.start("preparation");
+      }
+    );
+    const addRemoveGiveUpBtn = addAndRemoveEventListener(
+      giveUpBtn,
+      "click",
+      () => {
+        this.app.start("preparation");
+      }
+    );
+
+    this.eventsToRemove.push(addRemoveAgainBtn, addRemoveGiveUpBtn);
   }
 }

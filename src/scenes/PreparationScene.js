@@ -217,11 +217,11 @@ class PreparationScene extends Scene {
     //Чем меньше клеток доступных для выстрела компьютера, тем выше уровень сложности
 
     if (level === "simple") {
-      untouchables = getRandomSeveral(freeCells, 5);
+      untouchables = getRandomSeveral(freeCells, 20);
     } else if (level === "middle") {
-      untouchables = getRandomSeveral(freeCells, 25);
+      untouchables = getRandomSeveral(freeCells, 35);
     } else if (level === "hard") {
-      untouchables = getRandomSeveral(freeCells, 50);
+      untouchables = getRandomSeveral(freeCells, 70);
     }
 
     this.app.start("computer", untouchables);
