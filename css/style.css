@@ -3,7 +3,7 @@
 	padding: 0;
 	user-select: none;
 }
-
+:focus {outline:none;} ::-moz-focus-inner {border:0;}
 body {
 	width: 100vw;
 	height: 100vh;
@@ -129,10 +129,26 @@ body {
 	justify-content: space-between;
 }
 
+
 .app-action {
 	width: 210px;
 	padding: 10px;
+	outline:none;
+	background-color: transparent;
+	border: 1px solid rgba(6, 25, 247, 0.45);
+	transition: all 0.2s ease-in-out;
 }
+
+.app-action:focus{
+	transition: all 0.2s ease-in-out;
+	outline:none
+}
+
+.app-action:active{
+	transition: all 0.2s ease-in-out;
+	box-shadow: 0px 0px 6px 1px rgba(6, 25, 247, 0.45);;
+}
+
 
 .shot {
 	width: 32px;
@@ -185,4 +201,5 @@ body {
 .hidden {
 	display: none;
 }
+
 
