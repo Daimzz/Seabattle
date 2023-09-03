@@ -1,1 +1,1 @@
-Some basic readme # Seabattle
+# Seabattle
